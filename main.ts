@@ -1,7 +1,9 @@
-scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles12, function (sprite, location) {
-    let mySprite: Sprite = null
-    mySprite.sayText("hello", 500, true)
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (scientist.vy == 0) {
+        scientist.vy = -200
+    }
 })
+let scientist: Sprite = null
 scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -125,7 +127,7 @@ scene.setBackgroundImage(img`
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
     `)
 tiles.setCurrentTilemap(tilemap`level1`)
-let scientist = sprites.create(img`
+scientist = sprites.create(img`
     . . . 1 1 . . . 1 . . . . . . . 
     . . . . 1 1 1 1 1 1 1 . . . . . 
     . . . . . 1 1 1 1 1 . . . . . . 
@@ -144,4 +146,5 @@ let scientist = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
 scene.cameraFollowSprite(scientist)
+controller.moveSprite(scientist, 100, 0)
 scientist.ay = 300
