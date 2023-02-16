@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "sprite-scaling": "*",
+        "animation": "*"
     },
     "files": [
         "main.blocks",

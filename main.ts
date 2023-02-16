@@ -3,6 +3,54 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         scientist.vy = -200
     }
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
+    scientist.setPosition(50, 13)
+    scientist.sayText("lava kills!", 2000, false)
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    scientist.setImage(img`
+        . . . 1 1 . . . 1 . . . . . . . 
+        . . . . 1 1 1 1 1 1 1 . . . . . 
+        . . . . . 1 1 1 1 1 . . 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 . . . 
+        . 1 1 1 1 d d 1 d d 1 1 . . . . 
+        . . . . . d f d f d . . . . . . 
+        . . . f . d d d d d . . . . . . 
+        . . . 1 . . 1 f 1 . . . . . . . 
+        . . . 1 1 1 1 f 1 1 1 . . . . . 
+        . . . . . . 1 f 1 . 1 . . . . . 
+        . . . . . . 1 f 1 . f . . . . . 
+        . . . . . . 1 f 1 . . . . . . . 
+        . . . . . f 1 . 1 f . . . . . . 
+        . . . . . f . . . f . . . . . . 
+        . . . . 8 8 . . 8 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `)
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    scientist.setImage(img`
+        . . . 1 1 . . . 1 . . . . . . . 
+        . . . . 1 1 1 1 1 1 1 . . . . . 
+        . . . . . 1 1 1 1 1 . . 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 . . . 
+        . 1 1 1 1 d d 1 d d 1 1 . . . . 
+        . . . . . d f d f d . . . . . . 
+        . . . . . d d d d d . f . . . . 
+        . . . . . . 1 f 1 . . 1 . . . . 
+        . . . . 1 1 1 f 1 1 1 1 . . . . 
+        . . . . 1 . 1 f 1 . . . . . . . 
+        . . . . f . 1 f 1 . . . . . . . 
+        . . . . . . 1 f 1 . . . . . . . 
+        . . . . . f 1 . 1 f . . . . . . 
+        . . . . . f . . . f . . . . . . 
+        . . . . . 8 8 . . 8 8 . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
+    scientist.setPosition(50, 13)
+    scientist.sayText("lava kills!", 2000, false)
+})
 let scientist: Sprite = null
 scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -126,25 +174,45 @@ scene.setBackgroundImage(img`
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
     `)
+let li = sprites.create(img`
+    f f f f f f f f f f f f f f f f 
+    f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 6 6 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 6 6 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 6 6 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 f f 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 f f 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 6 6 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 f f 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 f f 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 f f 6 6 f 
+    f 6 f f 6 6 6 6 6 6 6 f f 6 6 f 
+    f 6 f f f f f f f 6 6 f f 6 6 f 
+    f 6 f f f f f f f 6 6 f f 6 6 f 
+    f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+    f f f f f f f f f f f f f f f f 
+    `, SpriteKind.Food)
 tiles.setCurrentTilemap(tilemap`level1`)
 scientist = sprites.create(img`
     . . . 1 1 . . . 1 . . . . . . . 
     . . . . 1 1 1 1 1 1 1 . . . . . 
-    . . . . . 1 1 1 1 1 . . . . . . 
-    . . . . . . 1 1 1 1 1 . . . . . 
-    . . . . . . f 1 f . 1 1 . . . . 
-    . . . . . . f f f . . . . . . . 
-    . . . . . . . f . . . f . . . . 
-    . . . f f f f f . . f f . . . . 
-    . . f f . . . f f f f . . . . . 
-    . . f . . . . f . . . . . . . . 
-    . . . f f f f f f f f . . . . . 
-    . . . f . . . . . . f . . . . . 
-    . . . f . . . . . . f . . . . . 
-    . . . f . . . . . . f . . . . . 
-    . . . f . . . . . . f . . . . . 
+    . . . . . 1 1 1 1 1 . . 1 1 . . 
+    . . 1 1 1 1 1 1 1 1 1 1 1 . . . 
+    . 1 1 1 1 d d 1 d d 1 1 . . . . 
+    . . . . . d f d f d . . . . . . 
+    . . . . . d d d d d . . . . . . 
+    . . . . . . 1 f 1 . . . . . . . 
+    . . . . 1 1 1 f 1 1 1 . . . . . 
+    . . . . 1 . 1 f 1 . 1 . . . . . 
+    . . . . f . 1 f 1 . f . . . . . 
+    . . . . . . 1 f 1 . . . . . . . 
+    . . . . . f 1 . 1 f . . . . . . 
+    . . . . . f . . . f . . . . . . 
+    . . . . 8 8 . . . 8 8 . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
 scene.cameraFollowSprite(scientist)
 controller.moveSprite(scientist, 100, 0)
-scientist.ay = 300
+scientist.ay = 500
+scientist.setPosition(50, 13)
+li.setPosition(250, 5)
